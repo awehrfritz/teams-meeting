@@ -9,13 +9,12 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Interactive shell setup, system-wide because the home directory is a fresh volume without the
-# usual /etc/skel/.bashrc
+# usual copy of /etc/skel/.bashrc. That file provides Debian's defaults (history, coloured prompt
+# and ls, completion); aliases it doesn't define follow.
 RUN cat >> /etc/bash.bashrc <<'EOF'
 
-# Completion and colours (dev container)
-. /usr/share/bash-completion/bash_completion
-eval "$(dircolors -b)"
-alias ls='ls --color=auto'
+# Debian's default user setup and aliases (dev container)
+. /etc/skel/.bashrc
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 alias ll='ls -l'
