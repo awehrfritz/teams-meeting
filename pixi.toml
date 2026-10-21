@@ -1,0 +1,15 @@
+[workspace]
+authors = ["Armin Wehrfritz <3344784+awehrfritz@users.noreply.github.com>"]
+channels = ["conda-forge"]
+name = "teams_meeting"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+meeting = "python make_teams_meeting.py"
+meetings = "python manage_teams_meetings.py"
+
+[dependencies]
+python = ">=3.14.7,<3.15"
+requests = ">=2.34.2,<3"
+msal = ">=1.39.0,<2"

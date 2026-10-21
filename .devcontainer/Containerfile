@@ -1,0 +1,26 @@
+# Pixi base image with the latest pixi release, like the frequently updated host pixi. The base
+# image is cached locally; update with `podman pull ghcr.io/prefix-dev/pixi:trixie-slim`, then
+# remove the dev container so Zed rebuilds it.
+FROM ghcr.io/prefix-dev/pixi:trixie-slim
+
+# git for Zed's git integration, which runs inside the container; bash-completion for the terminal
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git ca-certificates bash-completion \
+    && rm -rf /var/lib/apt/lists/*
+
+# Interactive shell setup, system-wide because the home directory is a fresh volume without the
+# usual /etc/skel/.bashrc
+RUN cat >> /etc/bash.bashrc <<'EOF'
+
+# Completion and colours (dev container)
+. /usr/share/bash-completion/bash_completion
+eval "$(dircolors -b)"
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias diff='diff --color=auto'
+alias ll='ls -l'
+alias la='ls -la'
+alias lt='ls -lrt'
+alias l1='ls -1'
+alias lS='ls -lrS'
+EOF
