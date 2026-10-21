@@ -1,5 +1,7 @@
 [workspace]
 authors = ["Armin Wehrfritz <3344784+awehrfritz@users.noreply.github.com>"]
+license = "MIT"
+license-file = "LICENSE"
 channels = ["conda-forge"]
 name = "teams_meeting"
 platforms = ["linux-64"]

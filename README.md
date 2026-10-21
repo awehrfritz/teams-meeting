@@ -179,3 +179,7 @@ pixi run meetings prune            # drop deleted/expired meetings from the log
 
 Deleting by join link also works for meetings that aren't in the log. Meetings
 created before the log existed or in the Teams app aren't listed.
+
+## License
+
+[MIT](LICENSE)
