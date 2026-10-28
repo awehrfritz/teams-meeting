@@ -3,7 +3,7 @@ authors = ["Armin Wehrfritz <3344784+awehrfritz@users.noreply.github.com>"]
 license = "MIT"
 license-file = "LICENSE"
 channels = ["conda-forge"]
-name = "teams_meeting"
+name = "teams-meeting"
 platforms = ["linux-64"]
 version = "0.1.0"
 

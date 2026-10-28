@@ -58,9 +58,9 @@ options, so its own project mount is redirected to an unused tmpfs
 Two podman volumes keep the container's state separate from the host. Rootless
 podman stores them under `~/.local/share/containers/storage/volumes/`:
 
-- `teams_meeting-pixi`: the container's pixi environment, mounted over `.pixi`
+- `teams-meeting-pixi`: the container's pixi environment, mounted over `.pixi`
   (the host's environment contains host paths and must not be rebuilt)
-- `teams_meeting-home`: the container's home directory, i.e. its own pixi
+- `teams-meeting-home`: the container's home directory, i.e. its own pixi
   cache, Teams token cache and meeting log, so you sign in to Microsoft
   separately inside the container
 

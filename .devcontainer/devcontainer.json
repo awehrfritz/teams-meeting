@@ -1,7 +1,6 @@
 {
-  // Rootless podman dev container for Zed (requires "use_podman": true in Zed's settings).
-  // krun microVMs can't be used: Zed connects via `podman exec`, which krun doesn't support.
-  "name": "teams_meeting",
+  // Rootless podman dev container for Zed (requires "use_podman": true in Zed's settings)
+  "name": "Microsoft Teams meeting links via the Microsoft Graph API",
   "build": { "dockerfile": "Containerfile" },
 
   // Zed always mounts the project itself, but can't pass mount options such as ":z" (SELinux
@@ -11,15 +10,16 @@
   // A fixed path, because Zed doesn't substitute variables inside it (${containerWorkspaceFolder}
   // would contain a literal "${localWorkspaceFolderBasename}").
   "workspaceMount": "type=tmpfs,target=/workspaces/.unused-zed-mount",
-  "workspaceFolder": "/workspaces/teams_meeting",
+  "workspaceFolder": "/workspaces/teams-meeting",
 
   "runArgs": [
     "--volume=${localWorkspaceFolder}:${containerWorkspaceFolder}:z",
     "--cap-drop=ALL",
     // Any --security-opt also stops Zed from adding --security-opt=label=disable,
-    // so the container stays confined by SELinux
+    // so the container stays confined by SELinux.
     "--security-opt=no-new-privileges",
-    // Real home directory for the user Zed maps in with --userns=keep-id (default would be /)
+    // Zed adds --userns=keep-id for podman, so podman creates a passwd entry for the host user,
+    // but with home "/". Override it so $HOME is the persistent home volume mounted below.
     "--passwd-entry=$USERNAME:*:$UID:$GID::/home/$USERNAME:/bin/bash",
     // Run the container's main process as that user too (Zed's image sets USER root). Podman
     // gives new volumes to this user, so the volumes below are writable.
